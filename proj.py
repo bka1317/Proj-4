@@ -1,5 +1,9 @@
 from random import shuffle
 
+# bits is the bitwise integer
+# lst is a list of integers
+# n is the number of bits
+# shfflBts is the bitwise integer
 def perm(bits, lst, inp):
     shfflBts = 0
     for x in lst:
@@ -7,6 +11,8 @@ def perm(bits, lst, inp):
         shfflBts ^= (bits >> (inp - x)) & 1
     return shfflBts
 
+# PC1 is the permutation 1
+# 64 -> 56 bits
 PC1 = [57, 49, 41, 33, 25, 17, 9,
 1, 58, 50, 42, 34, 26, 18, 10, 2, 
 59, 51, 43, 35, 27, 19, 11, 3, 60,
@@ -15,6 +21,8 @@ PC1 = [57, 49, 41, 33, 25, 17, 9,
 6, 61, 53, 45, 37, 29, 21, 13, 5, 28, 
 20, 12, 4]
 
+# PC2 is the permutation 2
+# 56 -> 48 bits
 PC2 = [14, 17, 11, 24, 1, 5, 3,
 28, 15, 6, 21, 10, 23, 19, 12, 
 4, 26, 8, 16, 7, 27, 20, 13, 2, 
@@ -22,15 +30,19 @@ PC2 = [14, 17, 11, 24, 1, 5, 3,
 51, 45, 33, 48, 44, 49, 39, 56, 
 34, 53, 46, 42, 50, 36, 29, 32]
 
+# 3 given 64-bit keys in hex
 key1 = int('1F1F1F1F0E0E0E0E', base = 16)
 key2 = int('FE01FE01FE01FE01', base = 16)
 key3 = int('FAB9D5B8CAB7CBA6', base = 16)
 
+# shifts the key to the left 1
 shift1 = list(range(2, 29)) + [1] + list(range(30, 57)) + [29]
+# shifts the key to the left 2
 shift2 = list(range(3, 29)) + [1, 2] + list(range(31, 57)) + [29, 30]
 
 
-
+# key is the initial given key
+# klst is the 16 round keys
 def roundKeys(key):
     klst = []
     cd = perm(key, PC1, 64)
@@ -44,7 +56,7 @@ def roundKeys(key):
 
 
 
-
+# keys is an array of round keys returned by roundKeys()
 keys = roundKeys(key1)
 for k in keys:
     print(hex(k))
