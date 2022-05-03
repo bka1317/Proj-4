@@ -1,15 +1,6 @@
 from random import shuffle
 
-# bits is the bitwise integer
-# lst is a list of integers
-# n is the number of bits
-# shfflBts is the bitwise integer
-def perm(bits, lst, inp):
-    shfflBts = 0
-    for x in lst:
-        shfflBts <<= 1
-        shfflBts ^= (bits >> (inp - x)) & 1
-    return shfflBts
+
 
 # PC1 is the permutation 1
 # 64 -> 56 bits
@@ -30,6 +21,17 @@ PC2 = [14, 17, 11, 24, 1, 5, 3,
 51, 45, 33, 48, 44, 49, 39, 56, 
 34, 53, 46, 42, 50, 36, 29, 32]
 
+# bits is the bitwise integer
+# lst is a list of integers
+# inp is the number of bits
+# shfflBts is the bitwise integer
+def perm(bits, lst, inp):
+    shfflBts = 0
+    for x in lst:
+        shfflBts <<= 1
+        shfflBts ^= (bits >> (inp - x)) & 1
+    return shfflBts
+    
 # 3 given 64-bit keys in hex
 key1 = int('1F1F1F1F0E0E0E0E', base = 16)
 key2 = int('FE01FE01FE01FE01', base = 16)
